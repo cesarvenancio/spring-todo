@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Todo Tasks Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<form th:action="@{/logout}" method="get">
+			<button class="btn btn-md btn-danger btn-block" name="registration"
+				type="Submit">Logout</button>
+		</form>
+
+		<div class="panel-group" style="margin-top: 40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					Welcome
+					<div sec:authentication="name"></div>
+				</div>
+			</div>
+		</div>
+
+		<h2>
+			<span class="text-success" th:utext="${successMessage}"></span> 
+			<span class="text-error" th:utext="${errorMessage}"></span>
+		</h2>
+
+		<div class="row">
+			<div>
+				<form autocomplete="off" action="#" th:action="@{/saveTask}"
+					th:object="${task}" method="post" class="form-vertical" role="form">
+					<h2>Tasks Form</h2>
+					<div class="form-group">
+						<div class="col-sm-7">
+							<label th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}" class="validation-message"></label> <input
+								type="text" th:field="*{description}"
+								placeholder="Task Description" class="form-control" />
+						</div>
+						<div class="col-sm-2">
+							<label th:if="${#fields.hasErrors('dueDate')}"
+								th:errors="*{dueDate}" class="validation-message"></label> <input
+								type="date" th:field="*{dueDate}" class="form-control" />
+						</div>
+						<div class="col-sm-1">
+							<label th:if="${#fields.hasErrors('priority')}"
+								th:errors="*{priority}" class="validation-message"></label> <input
+								type="number" th:field="*{priority}" min="1" max="5"
+								class="form-control" />
+						</div>
+						<div class="col-sm-2">
+							<button type="submit" class="btn btn-primary btn-block">Include</button>
+						</div>
+					</div>
+
+					<div class="container" th:fragment="content">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Description</th>
+									<th>Due Date</th>
+									<th>Priority</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${tasks.empty}">
+									<td colspan="5">No Tasks</td>
+								</tr>
+								<tr th:each="task : ${tasks}">
+									<td th:text="${task.description}" />
+									<td th:text="${#dates.format(task.dueDate, 'yyyy-MM-dd')}" />
+									<td th:text="${task.priority}" />
+									<td><a th:href="@{'/deleteTask/' + ${task.id}}">Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
