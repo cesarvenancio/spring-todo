@@ -32,12 +32,15 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+            modelAndView.addObject("errorMessage", "User with this email already exists");
+            modelAndView.setViewName("login");
+
+            return modelAndView;
         }
+        
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registrationUser");
+            modelAndView.addObject("errorMessage", "Problem in create the user");
+            modelAndView.setViewName("login");
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");

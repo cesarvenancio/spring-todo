@@ -6,6 +6,8 @@
 <title>Todo App</title>
 <link rel="icon" href="img/favicon.ico">
 <!-- CSS FILES -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
 </head>
@@ -39,7 +41,10 @@
 					<div class="uk-margin" th:if="${param.error}">
 						<label>Email or Password invalid, please verify</label>
 					</div>
-					<span class="text-success" th:utext="${successMessage}" />
+					<div>
+						<span class="text-success" th:utext="${successMessage}" />
+						<span class="text-danger" th:utext="${errorMessage}" />
+					</div>
 					<div class="uk-margin">
 						<button type="submit"
 							class="uk-button uk-button-primary uk-border-pill uk-width-1-1">LOG
