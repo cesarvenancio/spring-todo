@@ -1,6 +1,5 @@
 package com.challenge.todo.controller;
 
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -55,6 +54,7 @@ public class TaskController {
         
         if (!bindingResult.hasErrors()) {
             task.setUser(user);
+            task.setCreatedDate(new Date());
             taskService.saveTask(task);
             modelAndView.addObject("successMessage", "Task has been registered successfully");
         } 

@@ -5,6 +5,7 @@
 <head>
 <title>Todo Tasks Page</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/validation.css}"/>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -24,15 +25,14 @@
 		<div class="panel-group" style="margin-top: 40px">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					Welcome
-					<div sec:authentication="name"></div>
+					Welcome <div sec:authentication="name"></div>
 				</div>
 			</div>
 		</div>
 
 		<h2>
 			<span class="text-success" th:utext="${successMessage}"></span> 
-			<span class="text-error" th:utext="${errorMessage}"></span>
+			<span class="text-danger" th:utext="${errorMessage}"></span>
 		</h2>
 
 		<div class="row">
@@ -55,7 +55,7 @@
 						<div class="col-sm-1">
 							<label th:if="${#fields.hasErrors('priority')}"
 								th:errors="*{priority}" class="validation-message"></label> <input
-								type="number" th:field="*{priority}" min="1" max="5"
+								type="number" th:field="*{priority}" min="0" max="5"
 								class="form-control" />
 						</div>
 						<div class="col-sm-2">

@@ -1,4 +1,4 @@
-package com.challenge.task.user;
+package com.challenge.todo.test;
 
 import org.junit.Before;
 import org.junit.Test;

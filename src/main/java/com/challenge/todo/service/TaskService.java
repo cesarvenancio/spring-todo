@@ -1,6 +1,9 @@
 package com.challenge.todo.service;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +16,16 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Service
+@Transactional
 public class TaskService {
 
-    @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+    
     public List<Task> findAllTasks() {
         return taskRepository.findAll();
     }
