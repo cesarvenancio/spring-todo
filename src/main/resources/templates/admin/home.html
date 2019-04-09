@@ -5,7 +5,7 @@
 <head>
 <title>Todo Tasks Page</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/validation.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/css/validation.css}" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -17,22 +17,22 @@
 <body>
 	<div class="container">
 
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Logout</button>
-		</form>
-
-		<div class="panel-group" style="margin-top: 40px">
+		<div class="panel-group" style="margin-top: 40px;">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					Welcome <div sec:authentication="name"></div>
+					Welcome <span sec:authentication="name"></span>
+
+					<form th:action="@{/logout}" method="get" class="pull-right">
+						<button class="btn-floating btn-danger" 
+							type="Submit">Logout</button>
+					</form>
 				</div>
 			</div>
 		</div>
 
 		<h2>
-			<span class="text-success" th:utext="${successMessage}"></span> 
-			<span class="text-danger" th:utext="${errorMessage}"></span>
+			<span class="text-success" th:utext="${successMessage}"></span> <span
+				class="text-danger" th:utext="${errorMessage}"></span>
 		</h2>
 
 		<div class="row">
@@ -62,31 +62,30 @@
 							<button type="submit" class="btn btn-primary btn-block">Include</button>
 						</div>
 					</div>
-
-					<div class="container" th:fragment="content">
-						<table class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>Description</th>
-									<th>Due Date</th>
-									<th>Priority</th>
-									<th>Delete</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:if="${tasks.empty}">
-									<td colspan="5">No Tasks</td>
-								</tr>
-								<tr th:each="task : ${tasks}">
-									<td th:text="${task.description}" />
-									<td th:text="${#dates.format(task.dueDate, 'yyyy-MM-dd')}" />
-									<td th:text="${task.priority}" />
-									<td><a th:href="@{'/deleteTask/' + ${task.id}}">Delete</a></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
 				</form>
+				<div class="container" th:fragment="content">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Description</th>
+								<th>Due Date</th>
+								<th>Priority</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:if="${tasks.empty}">
+								<td colspan="5">No Tasks</td>
+							</tr>
+							<tr th:each="task : ${tasks}">
+								<td th:text="${task.description}" />
+								<td th:text="${#dates.format(task.dueDate, 'yyyy-MM-dd')}" />
+								<td th:text="${task.priority}" />
+								<td><a th:href="@{'/deleteTask/' + ${task.id}}">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
