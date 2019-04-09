@@ -29,9 +29,9 @@ public class Task {
     }
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
-    private int id;
+    private Integer id;
     
     @Column(name = "description")
     @NotEmpty(message = "*Please provide your task")

@@ -35,9 +35,7 @@ public class UserServiceTest {
                                                mockRoleRepository,
                                                bCryptPasswordEncoderMock);
         user = User.builder()
-                .id(1).name("Test")
-                .lastName("Last")
-                .email("test@gmail.com")
+                .id(1).email("test@gmail.com")
                 .build();
 
         Mockito.when(mockUserRepository.save(any()))

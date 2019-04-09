@@ -23,7 +23,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("registrationUser");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
@@ -42,7 +42,7 @@ public class UserController {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registrationUser");
+            modelAndView.setViewName("login");
 
         }
         return modelAndView;

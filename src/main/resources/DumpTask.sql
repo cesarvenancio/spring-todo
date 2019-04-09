@@ -24,13 +24,11 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `active` bit(1) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO `user` VALUES (1,_binary '','test@gmail.com','LAST NAME','FIRST NAME','$2a$10$ysrYmof0EkEKmN/Ncf4L.uO0JU5uPNoOwHRP/LyDvM3oAU/DXjcNC'),(2,_binary '','test2@gmail.com','LAST NAME','FIRST NAME','$2a$10$ysrYmof0EkEKmN/Ncf4L.uO0JU5uPNoOwHRP/LyDvM3oAU/DXjcNC');
+INSERT INTO `user` VALUES (1,_binary '','test@gmail.com','$2a$10$ysrYmof0EkEKmN/Ncf4L.uO0JU5uPNoOwHRP/LyDvM3oAU/DXjcNC'),(2,_binary '','test2@gmail.com','$2a$10$ysrYmof0EkEKmN/Ncf4L.uO0JU5uPNoOwHRP/LyDvM3oAU/DXjcNC');
 
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (

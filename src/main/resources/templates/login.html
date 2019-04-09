@@ -1,36 +1,92 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" class="uk-height-1-1">
 <head>
-    <title>Todo App</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Todo App</title>
+<link rel="icon" href="img/favicon.ico">
+<!-- CSS FILES -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css">
 </head>
+<body class="uk-height-1-1 uk-cover-container uk-background-secondary">
 
-<body>
-<form th:action="@{/registration}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration User Page</button>
-</form>
+	<div class="uk-position-cover uk-overlay-primary"></div>
 
-<div class="container">
-    <form th:action="@{/login}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" th:text="Welcome"></h3>
-        <br/>
+	<div
+		class="uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-light uk-position-relative uk-position-z-index">
+		<div class="uk-width-medium uk-padding-small"
+			uk-scrollspy="cls: uk-animation-fade">
+			<form th:action="@{/login}" method="POST">
+				<fieldset class="uk-fieldset">
+					<div class="uk-margin">
+						<div class="uk-inline uk-width-1-1">
+							<span class="uk-form-icon uk-form-icon-flip"
+								data-uk-icon="icon: user"></span> <input
+								class="uk-input uk-border-pill" required id="email" name="email"
+								placeholder="Username" type="text">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<div class="uk-inline uk-width-1-1">
+							<span class="uk-form-icon uk-form-icon-flip"
+								data-uk-icon="icon: lock"></span> <input
+								class="uk-input uk-border-pill" required placeholder="Password"
+								id="password" name="password" type="password">
+						</div>
+					</div>
 
-        <input type="text" id="email" name="email" th:placeholder="Email"
-               class="form-control"/> <br/>
-        <input type="password" th:placeholder="Password"
-               id="password" name="password" class="form-control"/> <br/>
+					<div class="uk-margin" th:if="${param.error}">
+						<label>Email or Password invalid, please verify</label>
+					</div>
+					<span class="text-success" th:utext="${successMessage}" />
+					<div class="uk-margin">
+						<button type="submit"
+							class="uk-button uk-button-primary uk-border-pill uk-width-1-1">LOG
+							IN</button>
+					</div>
+				</fieldset>
+			</form>
+			<div>
+				<div class="uk-text-center">
+					<a class="uk-link-reset uk-text-small"
+						data-uk-toggle="target: #recover;animation: uk-animation-slide-top-small">New
+						User?</a>
+				</div>
+				<div class="uk-margin-small-top" id="recover" hidden>
+					<form th:action="@{/registration}" th:object="${user}" method="post">
 
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
-    </form>
-</div>
+						<div class="uk-margin-small">
+							<div class="uk-inline uk-width-1-1">
+									<span class="uk-form-icon uk-form-icon-flip"
+									data-uk-icon="icon: mail"></span> <input th:field="*{email}"
+									class="uk-input uk-border-pill" placeholder="E-mail" required
+									type="text">
+							</div>
+						</div>
+						<div class="uk-margin-small">
+							<div class="uk-inline uk-width-1-1">
+								<span class="uk-form-icon uk-form-icon-flip"
+									data-uk-icon="icon: mail"></span> <input th:field="*{password}"
+									class="uk-input uk-border-pill" placeholder="Password" required
+									type="password">
+							</div>
+						</div>
+						<div class="uk-margin-small">
+							<button type="submit"
+								class="uk-button uk-button-primary uk-border-pill uk-width-1-1">Save
+								User</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS FILES -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/js/uikit.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/js/uikit-icons.min.js"></script>
 </body>
 </html>
